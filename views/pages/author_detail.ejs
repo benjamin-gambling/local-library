@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% include ../partials/head %>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <% include ../partials/navbar %>
+        <div class="col-sm-10">
+          <h1><%= author.name %></h1>
+          <p><%=author.lifespan%></p>
+          <br />
+          <div style="margin-left:20px;margin-top:20px">
+            <h4>Books</h4>
+            <dl>
+              <% if(author_books.length > 0) { author_books.forEach((book) => { %>
+              <dt>
+                <a href="<%= book.url %>"><%= book.title %></a>
+                <dd>
+                  <%= book.summary %>
+                </dd>
+              </dt>
+              <br />
+              <% })} else { %>
+              <p>This author has no book!</li>
+              <% } %>
+            </dl>
+          </div>
+          <p>
+            <a href="<%= `${author.url}/delete` %>">Delete </a>|
+            <a href="<%= `${author.url}/update` %>">Update</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

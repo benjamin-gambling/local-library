@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% include ../partials/head %>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <% include ../partials/navbar %>
+        <div class="col-sm-10">
+          <h1><%= genre.name %></h1>
+          <br />
+          <div style="margin-left:20px;margin-top:20px">
+            <h4>Books</h4>
+            <dl>
+              <% if(genre_books.length > 0) { genre_books.forEach((book) => { %>
+              <dt>
+                <a href="<%= book.url %>"><%= book.title %></a>
+                <dd>
+                  <%= book.summary %>
+                </dd>
+              </dt>
+              <br />
+              <% })} else { %>
+              <p>This genre has no books!</li>
+              <% } %>
+            </dl>
+          </div>
+          <p>
+            <a href="<%= `${genre.url}/delete` %>">Delete </a> |
+            <a href="<%= `${genre.url}/update` %>">Update</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

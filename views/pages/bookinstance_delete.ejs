@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% include ../partials/head %>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <% include ../partials/navbar %>
+        <div class="col-sm-10">
+          <h1><%= title %></h1>
+
+          <p>Do you really want to delete this copy?</p>
+          <form action="" method="POST">
+            <div class="form-group">
+              <input
+                type="hidden"
+                id="bookinstanceid"
+                name="bookinstanceid"
+                required="true"
+                value="<%= book_instance._id %>"
+                class="form-control"
+              />
+            </div>
+            <button class="btn btn-primary" type="submit">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

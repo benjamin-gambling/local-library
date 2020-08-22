@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% include ../partials/head %>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <% include ../partials/navbar %>
+        <div class="col-sm-10">
+          <h1>ID: <%= bookinstance._id %></h1>
+          <br />
+          <p>
+            <strong>Title: </strong
+            ><a href="<%= bookinstance.book.url %>">
+              <%= bookinstance.book.title %>
+            </a>
+          </p>
+          <p><strong>Imprint: </strong><%= bookinstance.imprint %></p>
+          <br />
+          <p>
+            <strong>Status: </strong>
+            <% if(bookinstance.status === 'Available'){ %>
+            <span class="text-success"><%= bookinstance.status %></span>
+            <% } else if(bookinstance.status === 'Maintenance'){ %>
+            <span class="text-danger"><%= bookinstance.status %></span>
+            <% } else { %>
+            <span class="text-warning"><%= bookinstance.status %></span>
+            <% } %>
+          </p>
+          <% if(bookinstance.status !== 'Available'){ %>
+          <p>
+            <strong>Due back: </strong><%= bookinstance.due_back_formatted %>
+          </p>
+          <% } %>
+        </div>
+        <p>
+          <a href="<%= `${bookinstance.url}/delete` %>">Delete </a> |
+          <a href="<%= `${bookinstance.url}/update` %>">Update</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

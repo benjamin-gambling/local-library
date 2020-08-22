@@ -10,8 +10,14 @@ var sassMiddleware = require("node-sass-middleware");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+const catalogRouter = require("./routes/catalog"); //IMPORT ROUTES FOR "CATALOG" AREA OF SITE
+
+var compression = require("compression");
+var helmet = require("helmet");
 
 var app = express();
+
+app.use(helmet());
 
 //ADDED - SET UP MONGOOSE CONNECTION
 const mongoose = require("mongoose");
@@ -21,7 +27,7 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "views/pages"));
 app.set("view engine", "ejs");
 
 app.use(logger("dev"));
@@ -36,10 +42,14 @@ app.use(
     sourceMap: true,
   })
 );
+
+app.use(compression()); //Compress all routes
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/catalog", catalogRouter); // ADD CATALOG ROUTES TO MIDDLEWARE CHAIN
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
